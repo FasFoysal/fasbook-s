@@ -6,7 +6,9 @@ const cors = require('cors');
 const PORT = 8000 || process.env.POST;
 
 app.use(cors({
-    origin:"http://localhost:3000",
+    // https://visionary-mooncake-916248.netlify.app
+    // http://localhost:3000
+    origin:"https://visionary-mooncake-916248.netlify.app",
     methods:["*"]
 }))
 

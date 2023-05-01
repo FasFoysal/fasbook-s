@@ -2,16 +2,18 @@ const express = require('express');
 const app = express();
 const route = require('./router');
 const cors = require('cors');
+require('./db/signupUser');
 
 const PORT = 8000 || process.env.POST;
 
 app.use(cors({
-    // https://visionary-mooncake-916248.netlify.app
+    // https://fasbookc.netlify.app/
     // http://localhost:3000
-    origin:"https://visionary-mooncake-916248.netlify.app",
+    origin:"https://fasbookc.netlify.app",
     methods:["*"]
 }))
 
+app.use(express.json());
 
 app.use(route)
 app.listen(PORT,()=>{

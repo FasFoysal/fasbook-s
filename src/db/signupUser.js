@@ -42,6 +42,6 @@ const schema = new mongoose.Schema({
   },
 });
 
-const signupUser = mongoose.model("signupUser", schema);
+const signupUser = mongoose.model("fasbook-signupUser", schema);
 
 module.exports = signupUser;

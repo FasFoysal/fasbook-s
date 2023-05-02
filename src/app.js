@@ -9,7 +9,7 @@ const PORT = 8000 || process.env.POST;
 app.use(cors({
     // https://fasbookc.netlify.app/
     // http://localhost:3000
-    origin:"http://localhost:3000",
+    origin:"https://fasbookc.netlify.app",
     methods:["*"]
 }))
 

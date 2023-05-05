@@ -1,6 +1,6 @@
 var nodemailer = require("nodemailer");
 
-const sendMail = async (req, res, next) => {
+const forgotMail = async (req, res, next) => {
   try {
     let testAccount = await nodemailer.createTestAccount();
     let transporter = nodemailer.createTransport({
@@ -10,33 +10,28 @@ const sendMail = async (req, res, next) => {
         pass: "autvixnsyjkvkzdw",
       },
     });
-
-    const { name, email, text } = req.body;
-    if ( text && email && name) {
       try {
         let info = await transporter.sendMail({
-          from: "shounfoysal@mail.com",
-          to: "beautyakterff@gmail.com",
-          subject: name,
+          from: "shounfoysal@gmail.com",
+          to: req.email,
+          subject: "Fasbook",
           html: `
             <h1 style="color:orange">FasBook</h1>
-            <h3>name: ${name} </h3>
-            <h3>Email: ${email}</h3>
-            <p>Message: ${text}</p>
-            `,
+            <h3>Welcome to our opt service</h3>
+            <p>Your otp is: </p> <b style="color:orange"> ${req.otp} </b>
+            `
         });
 
-        res.json({ mgs: "Message send succesful", code: "M1" });
+        res.json({ mgs: "Check you mail", code: "M1" });
       } catch (error) {
         res.json({mgs:"Somthing wrong in server try again",code:"M0"});
+        console.log(error);
       }
-    } else {
-      res.send("plz fillup the form");
-    }
+
   } catch (err) {
     console.log(err);
     res.send(err);
   }
 };
 
-module.exports = sendMail;
+module.exports = forgotMail;

@@ -4,7 +4,8 @@ const signup = async (req, res, next) => {
   if (fname && lname && email && pass && repass) {
     if (pass === repass && pass.length >= 4) {
       try {
-        const userData = signupUser({ fname, lname, email, pass });
+        const name = `${fname} ${lname}`
+        const userData = signupUser({ name , email, pass });
         await userData.save();
         res.json({ mgs: "Signup successful 😎", code: 1 });
         next();

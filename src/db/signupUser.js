@@ -1,6 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require('bcrypt');
 
 const connected = async () => {
   try {
@@ -13,11 +14,7 @@ const connected = async () => {
 connected();
 
 const schema = new mongoose.Schema({
-  fname: {
-    type: String,
-    required: true,
-  },
-  lname: {
+  name: {
     type: String,
     required: true,
   },
@@ -36,11 +33,24 @@ const schema = new mongoose.Schema({
     required: true,
     min: 4,
   },
+  profile:{
+    type:String,
+    default:'profile/profile.jpeg'
+  },
   date: {
     type: Date,
     default: Date.now,
   },
 });
+
+schema.pre('save',async function(next){
+  try {
+    this.pass = await bcrypt.hash(this.pass,8);
+    next();
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 const signupUser = mongoose.model("fasbook-signupUser", schema);
 
